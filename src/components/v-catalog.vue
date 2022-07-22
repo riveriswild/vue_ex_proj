@@ -3,17 +3,19 @@
         <h1>Catalog</h1>
         <div class="v-catalog__list">
             <v-catalog-item 
-            v-for="product in products"
+            v-for="product in PRODUCTSG"
             :key="product.article"
-            v-bind:product-data="product"
-            @sendDataToParent="showChildArticleInConsole" />
-                    </div>
+            :product_data="product"
+            @sendDataToParent="showChildArticleInConsole"
+             />
+        </div>
     </div>
 </template>
 
 <script>
-
+// this.$store.state.products == 
   import vCatalogItem from './v-catalog-item.vue'
+  import { mapActions, mapGetters } from 'vuex'
     export default {
         name: "v-catalog",
         components: {
@@ -21,15 +23,23 @@
         },
         props: {},
         data() {
-            return {
-                
-            }
+            return {}
         },
-        computed: {},
+        computed: {
+            ...mapGetters([
+                'PRODUCTSG'
+            ])
+        },
         methods: {
+            ...mapActions([
+                'GET_PRODUCTS_FROM_API'
+            ]),
             showChildArticleInConsole(data){
                 console.log(data)
             }  
+    },
+    async created() {
+      await this.GET_PRODUCTS_FROM_API()
     }
 }
 </script>
