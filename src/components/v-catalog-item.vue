@@ -5,7 +5,7 @@
         <p class="v-catalog-item__price">{{ product_data.price }}</p>
         <button 
         class="v-catalog-item__add_to_cart_btn" 
-        @click="sendDataToParent"
+        @click="addToCart"
         >Add to cart
         </button>
     </div>
@@ -27,9 +27,9 @@
         },
         computed: {},
         methods: {
-            sendDataToParent(){
-                this.$emit('sendDataToParent', this.product_data.article) // name of method + what we want to pass
-                // sendArticle - как переданное будет называться в родителе
+            addToCart(){
+                this.$emit('addToCart', this.product_data) // name of method + what we want to pass
+                // addToCart - как переданное будет называться в родителе
                 console.log('data', this.product_data)
             }
         }
