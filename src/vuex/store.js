@@ -1,0 +1,34 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import axios from 'axios'
+
+Vue.use(Vuex);
+
+let store = new Vuex.store({
+    state: {
+        products: [],
+    },
+    mutations: {
+        SET_PRODUCTS_TO_STATE: (state, products) => {
+            state.products = products;    // наполняем массив данными
+        }
+    },  // мутации синхронны, если вызвать две, сначала одна, потом вторая
+    actions: {
+        GET_PRODUCTS_FROM_API({commit}) {
+            return axios('http://localhost:3000/products', {
+                method: 'GET',
+            })
+            .then((products) => {
+                commit('SET_PRODUCTS_TO_STATE', products)
+            })
+        }
+    }, // асинхронны
+    getters: {
+        PRODUCTS(state) {  // верни то что в стейте называется продуктз
+            return state.products;
+        }
+    }, // короткий путь получения информации данных стейта
+
+});
+
+export default store;
