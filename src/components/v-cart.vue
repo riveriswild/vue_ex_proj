@@ -13,7 +13,7 @@
         />
         <div class="v-cart__total">
             <p class="total__name">Total</p>
-            <p>2300</p>
+            <p>{{cartTotalCost}}</p>
             </div>
     </div>
 </template>
@@ -38,7 +38,19 @@ export default {
     data() {
         return {}
     },
-    computed: {},
+    computed: {
+        cartTotalCost() {
+            let result = []
+
+            for (let item of this.cart_data) {
+                result.push(item.price * item.quantity)
+            }
+            result = result.reduce(function(sum,el){
+                return sum+el;
+            })
+            return result;
+        }
+    },
     methods: {
         ...mapActions([
             'DELETE_FROM_CART'
