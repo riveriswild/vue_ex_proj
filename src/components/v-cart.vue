@@ -1,12 +1,20 @@
 <template>
     <div class="v-cart">
+        <router-link :to="{name:'catalog'}">
+        <div class="v-catalog__link_to_cart">Back to cart</div>
+        </router-link>
         <h1>Cart</h1>
+        <p v-if="!cart_data.length">There ae no products...</p>
         <v-cart-item 
         v-for="(item, index) in cart_data"
         :key="item.article"
         :cart_item_data='item'
         @deleteFromCart="deleteFromCart(index)"
         />
+        <div class="v-cart__total">
+            <p class="total__name">Total</p>
+            <p>2300</p>
+            </div>
     </div>
 </template>
 
@@ -42,6 +50,27 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.v-cart {
+    margin-bottom: 100px;
+
+    &__total {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: $padding*2;
+        display: flex;
+        justify-content: center;
+        background: #26ae68;
+        color: #fff;
+        font-size: 20px;
+    }
+    .total__name {
+        margin-right: $margin*2;
+    }
+
+}
+
 
 </style>
