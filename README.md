@@ -1,5 +1,8 @@
 # online_shop
 
+## Description
+This is just a project where I experiment with Vue
+
 ## Project setup
 ```
 npm install
@@ -22,3 +25,5 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
