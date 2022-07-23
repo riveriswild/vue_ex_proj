@@ -2,7 +2,10 @@
     <div class="v-main-wrapper">
     <p>{{title}}</p>
     <v-catalog />
-    <v-cart v-if="CART.length" />
+    <v-cart 
+        v-if="CART.length" 
+        :cart_data="CART"
+    />
 
     </div>
 </template>
@@ -19,7 +22,8 @@ import { mapGetters } from 'vuex'
             vCatalog,
             vCart
         },
-        props: {},
+        props: {
+        },
         data() {
             return {
                 title: 'Main wrapper'

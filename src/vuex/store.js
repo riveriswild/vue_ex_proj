@@ -12,8 +12,12 @@ let store = new Vuex.Store({
     mutations: {
         SET_PRODUCTS_TO_STATE: (state, products) => {   // 3. Та самая мутация, которая вызывается в экшне
             state.products = products;    // наполняем массив в стейте данными
+        },
+        SET_CART: (state, product) => {
+            state.cart.push(product);
         }
     },  // мутации синхронны, если вызвать две, сначала одна, потом вторая
+
     actions: {
         async GET_PRODUCTS_FROM_API({commit}) {
             try {
@@ -27,6 +31,9 @@ let store = new Vuex.Store({
                 return error;
             }
           },
+          ADD_TO_CART({commit}, product) {
+            commit('SET_CART', product);
+          }
     }, // асинхронны
     getters: {
         PRODUCTSG(state) {  // верни то что в стейте называется продуктз
