@@ -47,10 +47,11 @@ export default {
                 }
                 result = result.reduce(function(sum,el){
                     return sum+el;
-                })                
+                }) 
+                return result;               
+            } else {
+                return 0
             }
-
-            return result;
         }
     },
     methods: {
