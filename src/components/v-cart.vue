@@ -41,13 +41,15 @@ export default {
     computed: {
         cartTotalCost() {
             let result = []
-
-            for (let item of this.cart_data) {
-                result.push(item.price * item.quantity)
+            if (this.cart_data.length) {
+                for (let item of this.cart_data) {
+                    result.push(item.price * item.quantity)
+                }
+                result = result.reduce(function(sum,el){
+                    return sum+el;
+                })                
             }
-            result = result.reduce(function(sum,el){
-                return sum+el;
-            })
+
             return result;
         }
     },
