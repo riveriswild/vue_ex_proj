@@ -24,5 +24,12 @@ export default {
       },
       DELETE_FROM_CART({commit}, index) {
         commit('REMOVE_FROM_CART', index);
-      }
+      },
+      SET_MOBILE({commit}) {
+        commit('SWITCH_MOBILE')
+      },
+      SET_DESKTOP({commit}) {
+        commit('SWITCH_DESKTOP')
+      },
+
 }

@@ -8,6 +8,7 @@
             :selected="selected"
             :options="categories"
             @select="sortByCategories"
+            :isExtended='IS_DESKTOP'
         />
 
         <div class="v-catalog__list">
@@ -47,7 +48,9 @@
         computed: {
             ...mapGetters([
                 'PRODUCTSG',
-                'CART'
+                'CART',
+                'IS_DESKTOP',
+                'IS_MOBILE',
             ]),
             filteredProducts() {
                 if (this.sortedProducts.length) {
