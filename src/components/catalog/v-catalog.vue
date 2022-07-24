@@ -4,9 +4,15 @@
         <div class="v-catalog__link_to_cart">Cart: {{CART.length}}</div>
         </router-link>
         <h1>Catalog</h1>
+        <v-select
+            :selected="selected"
+            :options="categories"
+            @select="sortByCategories"
+        />
+
         <div class="v-catalog__list">
             <v-catalog-item 
-            v-for="product in PRODUCTSG"
+            v-for="product in filteredProducts"
             :key="product.article"
             :product_data="product"
             @addToCart="addToCart"
@@ -19,26 +25,53 @@
 // this.$store.state.products == 
   import vCatalogItem from './v-catalog-item.vue'
   import { mapActions, mapGetters } from 'vuex'
+  import vSelect from '../v-select.vue'
     export default {
         name: "v-catalog",
         components: {
-            vCatalogItem
+            vCatalogItem,
+            vSelect
         },
         props: {},
         data() {
-            return {}
+            return {
+                categories: [
+                    {name: 'Все', value: 'ALL'},
+                    {name: 'Мужские', value: 'м'},
+                    {name: 'Женские', value: 'ж'},
+                ],
+                selected: 'Все',
+                sortedProducts: []
+            }
         },
         computed: {
             ...mapGetters([
                 'PRODUCTSG',
                 'CART'
-            ])
+            ]),
+            filteredProducts() {
+                if (this.sortedProducts.length) {
+                    return this.sortedProducts
+                } else {
+                    return this.PRODUCTSG
+                }
+            }
         },
         methods: {
             ...mapActions([
                 'GET_PRODUCTS_FROM_API',
                 'ADD_TO_CART'
             ]),
+            sortByCategories(category) {
+                this.sortedProducts = [];
+                let vm = this;
+                 this.PRODUCTSG.map(function(item){
+                    if (item.category === category.name) {
+                        vm.sortedProducts.push(item);
+                    }
+                 })
+                 this.selected = category.name;
+            },
             addToCart(data){
                 this.ADD_TO_CART(data);
             }  

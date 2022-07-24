@@ -32,6 +32,9 @@
                 // addToCart - как переданное будет называться в родителе
                 console.log('data', this.product_data)
             }
+        },
+        mounted() {
+        this.$set(this.product_data, 'quantity', 1)
         }
     }
 </script>
