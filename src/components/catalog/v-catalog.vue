@@ -73,7 +73,7 @@
         },
         computed: {
             ...mapGetters([
-                'PRODUCTSG',
+                'PRODUCTS',
                 'CART',
                 'IS_DESKTOP',
                 'IS_MOBILE',
@@ -82,7 +82,7 @@
                 if (this.sortedProducts.length) {
                     return this.sortedProducts
                 } else {
-                    return this.PRODUCTSG
+                    return this.PRODUCTS
                 }
             }
         },
@@ -115,7 +115,7 @@
             },
             sortByCategories(category){
                 let vm = this
-                this.sortedProducts = [...this.PRODUCTSG]
+                this.sortedProducts = [...this.PRODUCTS]
                 this.sortedProducts = this.sortedProducts.filter(function(item) {
                     return item.price >= vm.minPrice && item.price <= vm.maxPrice
                 })
